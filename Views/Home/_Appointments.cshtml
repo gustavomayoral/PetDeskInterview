@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Appointment>
+    <div id="gridTable">
+        <table class="table table-striped">
+            <thead class="thead-dark ">
+                <tr>
+                    <th scope="col">Client</th>
+                    <th scope="col">Patient</th>
+                    <th scope="col">Date Time Requested</th>
+                    <th scope="col">Confirm</th>
+                    <th scope="col">Change</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var a in Model)
+                {
+                    <tr data-id="@a.appointmentId">
+                        <th scope="row">@($"{a.user.firstName} {a.user.lastName}") </th>
+                        <td>@($"{a.animal.firstName} ({a.animal.species} {a.animal.breed})") </td>
+                        <td>@a.requestedDateTimeOffset</td>
+                        <td><label data-id="@a.appointmentId" style="display:none;">Waiting for change confirmation</label>
+                        <a data-id="@a.appointmentId" asp-controller="Home" asp-action="Confirm" asp-route-id="@a.appointmentId" class="btn btn-success">Confirm</a></td>
+                        <td><a data-change-id="@a.appointmentId" asp-controller="Home" asp-action="Change"  class="btn btn-outline-info" data-toggle="modal" data-target="#changeModal">Change</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
