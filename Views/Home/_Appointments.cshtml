@@ -13,7 +13,7 @@
             <tbody>
                 @foreach (var a in Model)
                 {
-                    <tr data-id="@a.appointmentId">
+                    <tr  data-id="@a.appointmentId" >
                         <th scope="row">@($"{a.user.firstName} {a.user.lastName}") </th>
                         <td>@($"{a.animal.firstName} ({a.animal.species} {a.animal.breed})") </td>
                         <td>@a.requestedDateTimeOffset</td>

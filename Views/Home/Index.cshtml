@@ -1,5 +1,17 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+
+    var hours = new List<SelectListItem>();
+    hours.Add(new SelectListItem() { Text = "Pick Time", Value = "Pick Time"});
+    for(int hour = 7; hour<=24; hour++)
+    {
+        var ampm = hour > 11 ? (hour==12 ? "PM": (hour == 24 ?"AM":"PM")) : "AM";
+        var hourText = $"{(hour>12?hour-12:hour)}:00 {ampm}";
+        hours.Add(new SelectListItem() { Text = hourText, Value = hourText });
+        hourText = hourText.Replace(":00", ":30");
+        hours.Add(new SelectListItem() { Text = hourText, Value = hourText });
+    }
+
 }
     <div class="text-center">
         <h1 class="display-4">Your pending Appointments</h1>
@@ -9,11 +21,6 @@
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Launch demo modal
-        </button>
-
         <!-- Modal Change Appointment Form-->
         <div class="modal fade" id="changeModal" tabindex="-1" role="dialog" aria-labelledby="changeModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -30,14 +37,18 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Pick Time and Date</span>
                                 </div>
-                                <input type="text" aria-label="Pick Time" id="proposedTime" name="proposedTime" class="form-control">
-                                <input type="text" aria-label="Pick Date" id="proposedDate" name="proposedDate" class="form-control">
+                                <select id="proposedTime" name="proposedTime" class="form-control" 
+                                        asp-items="@(new SelectList(hours,"Value","Text"))">
+                                </select>
+                                <input type="text" aria-label="Pick Date" data-date-autoclose="true" id="proposedDate" name="proposedDate" class="form-control" value="Pick Date">
+                                <input type="hidden" name="changeId" id="changeId" />
+                                <input type="hidden" name="api" id="api" />
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" >Save changes</button>
+                        <button id="btnCancel" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button id="btnChange" type="button" class="btn btn-primary" >Send Change Request</button>
                     </div>
                 </div>
             </div>
