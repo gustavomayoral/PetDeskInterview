@@ -6,17 +6,6 @@ using System.Threading.Tasks;
 namespace PetDeskInterview.Models
 {
 
-    //{
-    // "appointmentId": 290318,
-    // "appointmentType": "Other",
-    // "createDateTime": "2018-11-28T22:57:33",
-    // "requestedDateTimeOffset": "2018-12-01T08:00:00-08:00",
-    // "user": {
-    //     "userId": 115066,
-    //     "firstName": "Tracey",
-    //     "lastName": "Polzin"
-    // },
-
     public class ChangeDto
     {
         public int changeId { get; set; }
@@ -41,12 +30,7 @@ namespace PetDeskInterview.Models
         public string lastName { get; set; }
 
     }
-    // "animal": {
-    //     "animalId": 137900,
-    //     "firstName": "Jackson",
-    //     "species": "Dog",
-    //     "breed": "German Shepherd"
-    // }
+
     public class animal
     {
         public int animalId { get; set; }

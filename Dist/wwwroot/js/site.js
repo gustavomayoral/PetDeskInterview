@@ -62,11 +62,12 @@
         var row = $("tr[data-id=" + id + "]")
         var data = $("form").serialize()
         var api = $("#api").val();
-        var jqxhr = $.post(api,data, function (event) {
+        var jqxhr = $.post(api, data, function (data) {
             cleanUp(id);
             row.addClass("table-info");
             $("a[data-change-id=" + id + "]").fadeOut(50);
             $("a[data-id=" + id + "]").fadeOut(50);
+            $("td[data-date-id=" + id + "]").text(data.proposedDate + " " + data.proposedTime.replace(" AM", ":00 AM").replace(" PM",":00 PM"));
             $("label[data-id=" + id + "]").fadeIn(50);
             $('#changeModal').modal("hide");
         })

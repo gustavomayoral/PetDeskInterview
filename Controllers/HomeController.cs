@@ -46,7 +46,7 @@ namespace PetDeskInterview.Controllers
 
         public IActionResult Change(ChangeDto change)
         {
-            if (change.changeId < 10000)
+            if (change.changeId < 10000) 
                 return BadRequest(change);
             else
                 return Ok(change);
